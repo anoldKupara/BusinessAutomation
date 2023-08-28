@@ -4,8 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BusinessAutomation.Domain.Finance.VehicleEntity
 {
-    public class Vehicle : AuditableEntity, IAggregateRoot
-    { 
+    public class Vehicle// : AuditableEntity, IAggregateRoot
+    {
+        public Guid Id { get; set; }
         public required string Name { get; set; }
         public required string RegistrationNumber { get; set; }
         public required string Color { get; set; }

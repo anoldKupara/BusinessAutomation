@@ -3,8 +3,9 @@ using BusinessAutomation.Domain.Finance.RequisitionStatuses;
 
 namespace BusinessAutomation.Domain.Finance.VehicleEntity
 {
-    public class VehicleRequisition : AuditableEntity, IAggregateRoot
+    public class VehicleRequisition //: AuditableEntity, IAggregateRoot
     {
+        public Guid Id { get; set; }
         public required string Name { get; set; }
         public required string Description { get; set; }
         public DateTime StartDate { get; set; }

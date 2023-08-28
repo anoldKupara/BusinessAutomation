@@ -5,8 +5,9 @@ using BusinessAutomation.Domain.Finance.VehicleEntity;
 
 namespace BusinessAutomation.Domain.Finance.FuelRequisitionEntity
 {
-    public class FuelRequisition : AuditableEntity, IAggregateRoot
+    public class FuelRequisition 
     {
+        public Guid Id { get; set; }
         public required string Name { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
