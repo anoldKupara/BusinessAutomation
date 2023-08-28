@@ -2,6 +2,7 @@
 using BusinessAutomation.Domain.Finance.RequisitionStatuses;
 using BusinessAutomation.Domain.Finance.VehicleEntity;
 using Microsoft.EntityFrameworkCore;
+using BusinessAutomation.Domain.Finance.FuelTypes;
 
 namespace BusinessAutomation.DbContexts
 {
@@ -17,5 +18,6 @@ namespace BusinessAutomation.DbContexts
         public DbSet<VehicleClass> VehicleClasses { get; set; }
         public DbSet<VehicleRequisition> VehicleRequisitions { get; set; }
         public DbSet<VehicleType> VehicleTypes { get; set; }
+        public DbSet<BusinessAutomation.Domain.Finance.FuelTypes.FuelType> FuelType { get; set; } = default!;
     }
 }
