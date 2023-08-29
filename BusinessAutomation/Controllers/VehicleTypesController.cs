@@ -60,6 +60,11 @@ namespace BusinessAutomation.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (string.IsNullOrWhiteSpace(vehicleType.Description))
+                {
+                    vehicleType.Description = vehicleType.Name;
+                }
+
                 vehicleType.Id = Guid.NewGuid();
                 _context.Add(vehicleType);
                 await _context.SaveChangesAsync();
@@ -67,6 +72,7 @@ namespace BusinessAutomation.Controllers
             }
             return View(vehicleType);
         }
+
 
         // GET: VehicleTypes/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
