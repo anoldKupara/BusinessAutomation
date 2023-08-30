@@ -1,5 +1,4 @@
-﻿using BusinessAutomation.Common.Contracts;
-using BusinessAutomation.Domain.Finance.FuelRequisitionEntity;
+﻿using BusinessAutomation.Domain.Finance.FuelRequisitionEntity;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BusinessAutomation.Domain.Finance.VehicleEntity
