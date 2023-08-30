@@ -52,14 +52,18 @@ namespace BusinessAutomation.Controllers
         }
 
         // POST: VehicleTypes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Description")] VehicleType vehicleType)
         {
             if (ModelState.IsValid)
             {
+                if (_context.VehicleTypes.Any(vt => vt.Name == vehicleType.Name))
+                {
+                    ModelState.AddModelError("Name", "This name already exists. Please enter a different name.");
+                    return View(vehicleType);
+                }
+
                 if (string.IsNullOrWhiteSpace(vehicleType.Description))
                 {
                     vehicleType.Description = vehicleType.Name;
@@ -91,8 +95,6 @@ namespace BusinessAutomation.Controllers
         }
 
         // POST: VehicleTypes/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, [Bind("Id,Name,Description")] VehicleType vehicleType)
@@ -104,6 +106,18 @@ namespace BusinessAutomation.Controllers
 
             if (ModelState.IsValid)
             {
+                var existingType = _context.VehicleTypes.FirstOrDefault(vt => vt.Name == vehicleType.Name && vt.Id != id);
+                if (existingType != null)
+                {
+                    ModelState.AddModelError("Name", "This name already exists. Please enter a different name.");
+                    return View(vehicleType);
+                }
+
+                if (string.IsNullOrWhiteSpace(vehicleType.Description))
+                {
+                    vehicleType.Description = vehicleType.Name;
+                }
+
                 try
                 {
                     _context.Update(vehicleType);
@@ -124,7 +138,6 @@ namespace BusinessAutomation.Controllers
             }
             return View(vehicleType);
         }
-
         // GET: VehicleTypes/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
         {
